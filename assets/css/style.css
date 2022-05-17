@@ -1,0 +1,30 @@
+:root {
+    --light-gray: rgb(183,183,183);
+    --light-blue: rgb(149, 194, 236);
+}
+
+/* title gradient */
+.gradient-custom {
+    /* fallback for old browsers */
+    background: #3b6dc3;
+
+    /* Chrome 10-25, Safari 5.1-6 */
+    background: -webkit-linear-gradient(to right, rgba(59, 109, 195, 1), rgba(35, 6, 86, 1));
+
+    /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: linear-gradient(to right, rgba(59, 109, 195, 1), rgba(35, 6, 86, 1))
+    }
+
+.center-all {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.light-gray-bg {
+    background-color: var(--light-gray);
+}
+
+.light-blue-bg {
+    background-color: var(--light-blue);
+}

@@ -1,0 +1,36 @@
+>build bootstrap layout
+    >>put header on top with title
+    >>make container and row for main
+        >build column to left
+            >>put searchbar at top of column
+                >>put serch button under searchbar
+                >>put div for history under button
+        >build large column to right 
+            >>put row on top for current city/day
+            put row in for 5 day title
+            put row in for next 5 day forcast cards
+
+check for localStorage array
+    if exists parse to array
+    else create array and stringify to localStorage
+
+when city is typed in searchbar
+    save city to 8 long history array 
+        stringify array to local storage
+    use geocoding api to change city to lat/long
+    use lat/long in onecall api to pull weather data with function
+        get current date in UTC global var
+        pull temp, wind, humidity, uv index, icon for current 'daily' to object
+            icon to string added on 'https://openweathermap.org/img/wn/' + icon + '.png'
+            populate curent day area
+                color uv index
+        create var object for next 5 days 
+            temp, wind, humidity, date
+            add day to UTC var
+            fetch data to object
+            create card with weather data
+            index++
+            day++
+            loop
+        
+        
