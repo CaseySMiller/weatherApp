@@ -18,13 +18,13 @@ var currentTemp = $('#current-temp');
 var currentWind = $('#current-wind');
 var currentHumid = $('#current-humid');
 var currentUvi = $('#current-uvi');
+var historyCity = $('div[id=history-button]');
 
 
 //fetch data for most recent search
 getLatLong();
 //populate searchHistory to html
 function populateHistory () {
-    var historyCity = $('div[id=history-button]');
 
     for (i = 0; i < searchHistory.length; i++) {
         historyCity[i].textContent = searchHistory[i];
@@ -114,7 +114,6 @@ function getLatLong () {
     });
 };
 
-
 // get weather data on search click and update searchHistory array and localStorage
 searchButton.on('click', function() {
     var searchBar = $('#search-bar').val();
@@ -129,3 +128,8 @@ searchButton.on('click', function() {
     getLatLong();
 });
 
+// search for city from history on click event
+historyCity.on('click', function(event) {
+  searchCity = event.target.innerText;
+  getLatLong();
+});

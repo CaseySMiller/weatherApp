@@ -14,7 +14,7 @@
     >>if exists parse to array
     >>else create array and stringify to localStorage
 
-get local time
+>>get local time
 
 >when city is typed in searchbar and search is clicked
     >>save city to 8 long history array 
@@ -34,5 +34,7 @@ get local time
             index++
             day++
             loop
+
+>>create function to search for a history when it is clicked
         
         
