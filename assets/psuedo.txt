@@ -14,14 +14,16 @@
     >>if exists parse to array
     >>else create array and stringify to localStorage
 
-when city is typed in searchbar and search is clicked
-    save city to 8 long history array 
-        stringify array to local storage
-    use geocoding api to change city to lat/long
-    use lat/long in onecall api to pull weather data with function
-        get current date in UTC global var
-        pull temp, wind, humidity, uv index, icon for current 'daily' to object
-            icon to string added on 'https://openweathermap.org/img/wn/' + icon + '.png'
+get local time
+
+>when city is typed in searchbar and search is clicked
+    >>save city to 8 long history array 
+        >>stringify array to local storage
+    >>use geocoding api to change city to lat/long
+    >>use lat/long in onecall api to pull weather data with function
+        >>get current date in UTC global var
+        >>fetch temp, wind, humidity, uv index, icon for current
+            >>icon to string added 
             populate curent day area
                 color uv index
         create var object for next 5 days 
