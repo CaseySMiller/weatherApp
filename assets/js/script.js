@@ -1,7 +1,7 @@
 //declare variables
 var searchCity = "";
-var searchLat = "33.44";
-var searchLon = "-94.04";
+var searchLat = "34.008";
+var searchLon = "71.5785";
 // define global elements
 var searchButton = $('#search-button');
 
@@ -29,7 +29,7 @@ populateHistory();
 
 // get weather api data
 function getWeather () {
-    var requestUrl = 'https://api.openweathermap.org/data/3.0/onecall?lat=' + searchLat + '&lon=' + searchLon + 'exclude=minutely,hourly,alerts&appid=57f0ddcddcbf55dbf6cea93885f48c61';
+    var requestUrl = 'https://api.openweathermap.org/data/2.5/onecall?lat=' + searchLat + '&lon=' + searchLon + '&exclude=minutely,hourly,alerts&appid=57f0ddcddcbf55dbf6cea93885f48c61';
     fetch(requestUrl)
       .then(function (response) {
         return response.json();
@@ -41,29 +41,34 @@ function getWeather () {
 
 // function to convert plaintext city to lat/long and pass it to getWeather() function
 function getLatLong () {
-    var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchCity + '&limit=1&appid=57f0ddcddcbf55dbf6cea93885f48c61';
-
+    //remove spaces from string
+    var searchCityString = searchCity.replace(/ /g, "%20");
+    //api request
+    var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchCityString + ',us&limit=1&appid=57f0ddcddcbf55dbf6cea93885f48c61';
     fetch(requestUrl)
     .then(function (response) {
       return response.json();
     })
     .then(function (data) {
-      console.log(data);
       //store lat and long in variables for getWeather
+      searchLat = data[0].lat;
+      searchLon = data[0].lon;
+      // call function to get the weather
+      getWeather();
     });
-
 };
-// getWeather();
 
 
 // get weather data on search click and update searchHistory array and localStorage
 searchButton.on('click', function() {
     var searchBar = $('#search-bar').val();
+    // set searchCity var to current search
     searchCity = searchBar;
+    // update array and localStorage with new city
     searchHistory.splice(0, 0, searchCity);
     searchHistory.splice(8, 1);
     localStorage.setItem("searchHistory", JSON.stringify(searchHistory));
     populateHistory();
-    // getLatLong();
+    getLatLong();
 });
 
