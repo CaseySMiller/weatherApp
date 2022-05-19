@@ -114,7 +114,7 @@ function getLatLong () {
     //remove spaces from string
     var searchCityString = searchCity.replace(/ /g, "%20");
     //api request
-    var requestUrl = 'http://api.openweathermap.org/geo/1.0/direct?q=' + searchCityString + ',us&limit=1&appid=57f0ddcddcbf55dbf6cea93885f48c61';
+    var requestUrl = 'https://api.openweathermap.org/geo/1.0/direct?q=' + searchCityString + ',us&limit=1&appid=57f0ddcddcbf55dbf6cea93885f48c61';
     fetch(requestUrl)
     .then(function (response) {
       return response.json();
