@@ -16,7 +16,7 @@
 
 >>get local time
 
->when city is typed in searchbar and search is clicked
+>>when city is typed in searchbar and search is clicked
     >>save city to 8 long history array 
         >>stringify array to local storage
     >>use geocoding api to change city to lat/long
@@ -24,17 +24,17 @@
         >>get current date in UTC global var
         >>fetch temp, wind, humidity, uv index, icon for current
             >>icon to string added 
-            populate curent day area
-                color uv index
-        create var object for next 5 days 
-            temp, wind, humidity, date
-            add day to UTC var
-            fetch data to object
-            create card with weather data
-            index++
-            day++
-            loop
+            >>populate curent day area
+                >>color uv index
+        >>create var object for next 5 days 
+            >>temp, wind, humidity, date
+            >>dd day to UTC var
+            >>fetch data to object
+            >>create card with weather data
+
 
 >>create function to search for a history when it is clicked
+
+create status check for 400 return on geocoding
         
         

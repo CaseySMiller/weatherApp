@@ -19,6 +19,11 @@ var currentWind = $('#current-wind');
 var currentHumid = $('#current-humid');
 var currentUvi = $('#current-uvi');
 var historyCity = $('div[id=history-button]');
+var futureIcon = $('img[id=weather-icon]'); //probably dont need
+var futureDate = $('span[id=date]'); 
+var futureTemp = $('span[id=temp]'); //access with innerText?
+var futureWind = $('span[id=wind]');
+var futureHumid = $('span[id=humid]');
 
 
 //fetch data for most recent search
@@ -46,7 +51,6 @@ function timeConverter(UNIX_timestamp){
   var time = month + '/' + date + '/' + year;
   return time;
 }
-// console.log(timeConverter(1652889600));
 
 
 // get weather api data and populate html
@@ -57,7 +61,6 @@ function getWeather () {
     return response.json();
   })
   .then(function (data) {
-    console.log(data);
     //parse date
     todayDate = timeConverter(data.current.dt);
     // add city state and date
@@ -88,7 +91,20 @@ function getWeather () {
     } else {
       currentUvi.removeClass('btn-danger btn-success');
       currentUvi.addClass('btn-warning');
-    }
+    };
+
+    //populate 5 day forecast
+    
+    for (i = 0; i < 5; i++) {
+      iconCode = data.daily[i].weather[0].icon;
+      futureDate[i].innerText = timeConverter(data.daily[i].dt);
+      futureIcon[i].src = 'https://openweathermap.org/img/w/' + iconCode + '.png';
+      futureTemp[i].innerText = data.daily[i].temp.max;
+      futureWind[i].innerText = data.daily[i].wind_speed;
+      futureHumid[i].innerText = data.daily[i].humidity;
+      
+    };
+
 
     });
 };
@@ -105,21 +121,25 @@ function getLatLong () {
     })
     .then(function (data) {
       //store data in global variables variables
+      if (data[0] == undefined) {
+        alert('Sorry, no results');
+      } else {
       searchLat = data[0].lat;
       searchLon = data[0].lon;
       cityName = data[0].name;
       stateName = data[0].state;
       // call function to get the weather
       getWeather();
+      };
     });
 };
 
 // get weather data on search click and update searchHistory array and localStorage
 searchButton.on('click', function() {
-    var searchBar = $('#search-bar').val();
+    searchBar = $('#search-bar').val();
     $('#search-bar').val('');
     // set searchCity var to current search
-    searchCity = searchBar;
+        searchCity = searchBar;
     // update array and localStorage with new city
     searchHistory.splice(0, 0, searchCity);
     searchHistory.splice(8, 1);
